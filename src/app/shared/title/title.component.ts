@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, booleanAttribute } from '@angular/core';
 
 @Component({
   selector: 'app-title',
@@ -7,8 +7,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   imports: [
     CommonModule,
   ],
-  templateUrl: './title.component.html',
+  template: `
+    <h1 class="text-3xl mb-5">{{title}} - {{withShadow}}</h1>`,
   styleUrl: './title.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TitleComponent { }
+export default class TitleComponent { 
+  @Input({required: true}) title: string = '';
+  @Input({transform: booleanAttribute}) withShadow:boolean = false;
+}
